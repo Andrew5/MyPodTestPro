@@ -10,21 +10,21 @@
 #pod spec lint --verbose --allow-warnings --use-librarie
 #既有私有库依赖，还有CommonCrypto这种的依赖：
 #验证
-#pod spec lint --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,git@gitlab.317hu.com:HuModularizationLibrary/HuModularizationSpecs.git](https://github.com/CocoaPods/Specs.git,git@gitlab.317hu.com:HuModularizationLibrary/HuModularizationSpecs.git)’
+#pod spec lint --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)’
 #提交：
-#pod repo push HuModularizationSpecs HuThirdKit.podspec --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,git@gitlab.317hu.com:HuModularizationLibrary/HuModularizationSpecs.git](https://github.com/CocoaPods/Specs.git,git@gitlab.317hu.com:HuModularizationLibrary/HuModularizationSpecs.git)'
+#pod repo push MyPodTestPro MyPodTestPro.podspec --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)'
 
 #上传podspec到trunk服务器中
-#将这个仓库clone到本地的.cocoapod/repos/xxxPodSpecs,当然这里使用pod命令行工具来执行，pod repo add xxxPodSpecs https://github/xxx/xxxPodSpecs.git，执行完成后再执行pod repo list就可以看到我们私有的spec仓库在列了。
-#将我们的HomeModule.podspecs托管到我们才创建的私有spec仓库,具体操作为cd 到HomeModule.podspec目录下，执行pod repo push xxxPodSpecs HomeModule.podspec,这里pod会执行一次校验，一般会报一些warn,你可以去解决一下，如果不想解决直接忽略的话，执行pod repo push xxxPodSpecs HomeModule.podspec --verbose --allow-warnings --use-libraries,不过如果是error错误，是无法忽略的。这里顺便提一下，在我使用1.5.3版本pod执行的时候，会报一个error是bug引起的，无法解决，通过升级到最新版pod就好了，升级pod只需要执行sudo gem install cocoapods就行了
+#将这个仓库clone到本地的.cocoapod/repos/xxxPodSpecs,当然这里使用pod命令行工具来执行，pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git，执行完成后再执行pod repo list就可以看到我们私有的spec仓库在列了。
+#将我们的HomeModule.podspecs托管到我们才创建的私有spec仓库,具体操作为cd 到MyPodTestPro.podspec目录下，执行pod repo push MyPodTestPro MyPodTestPro.podspec,这里pod会执行一次校验，一般会报一些warn,你可以去解决一下，如果不想解决直接忽略的话，执行pod repo push MyPodTestPro MyPodTestPro.podspec --verbose --allow-warnings --use-libraries,不过如果是error错误，是无法忽略的。这里顺便提一下，在我使用1.5.3版本pod执行的时候，会报一个error是bug引起的，无法解决，通过升级到最新版pod就好了，升级pod只需要执行sudo gem install cocoapods就行了
 #命令行：
-#git tag -m"first tag WXWCategory" "0.1.0"#打tag 上传podspec
+#git tag -m"first tag MyPodTestPro" "0.1.0"#打tag 上传podspec
 #git push --tags
-#pod trunk push WXWCategory.podspec #把podspec文件推送到CocoaPod官方库
+#pod trunk push MyPodTestPro.podspec #把podspec文件推送到CocoaPod官方库
 #上传需要一定时间，成功后更新本地pod依赖库
 #命令行：pod setup
 #查看代码有没有通过审核版本是否更新
-#命令行：pod search HycProject
+#命令行：pod search MyPodTestPro
 #下载线上git仓库（Podfile文件不在此讨论）
 #命令行：pod install
 #将podspec文件push到cocoapods服务器上
@@ -61,9 +61,9 @@ Pod::Spec.new do |s|
 # 单个截图
 #spec.screenshot = 'http://dl.dropbox.com/u/378729/MBProgressHUD/1.png'
 # 多个截图
-#spec.screenshots = [ 'http://dl.dropbox.com/u/378729/MBProgressHUD/1.png', 'http://dl.dropbox.com/u/378729/MBProgressHUD/2.png' ]
+#spec.screenshots = ['http://dl.dropbox.com/u/378729/MBProgressHUD/1.png', 'http://dl.dropbox.com/u/378729/MBProgressHUD/2.png']
 #可选的Pod库文档的URL。
-#  spec.documentation_url = 'http://www.example.com/docs.html'
+# spec.documentation_url = 'http://www.example.com/docs.html'
 # 指定脚本文件，ruby build_files.rb是脚本文件名
 #spec.prepare_command = 'ruby build_files.rb'
 #s命令是利用script来处理文本文件
@@ -245,7 +245,7 @@ Pod::Spec.new do |s|
 #  spec.cocoapods_version = '>= 1.10.1'
 #多资源情况下的书写方式，支持数组填充
 # spec.resource_bundles = {
-#   'GlobalButton' => ['GlobalButton/Assets/*.png']
+#   'MyPodTestPro' => ['MyPodTestPro/Assets/*.png']
 # }
 
 # spec.public_header_files = 'Pod/Classes/**/*.h'
