@@ -11,17 +11,16 @@
 #既有私有库依赖，还有CommonCrypto这种的依赖：
 #验证
 #pod spec lint --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)’
-#提交：
-#pod repo push MyPodTestPro MyPodTestPro.podspec --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)'
-
-#上传podspec到trunk服务器中
-#将这个仓库clone到本地的.cocoapod/repos/xxxPodSpecs,当然这里使用pod命令行工具来执行，pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git，执行完成后再执行pod repo list就可以看到我们私有的spec仓库在列了。
-#将我们的HomeModule.podspecs托管到我们才创建的私有spec仓库,具体操作为cd 到MyPodTestPro.podspec目录下，执行pod repo push MyPodTestPro MyPodTestPro.podspec,这里pod会执行一次校验，一般会报一些warn,你可以去解决一下，如果不想解决直接忽略的话，执行pod repo push MyPodTestPro MyPodTestPro.podspec --verbose --allow-warnings --use-libraries,不过如果是error错误，是无法忽略的。这里顺便提一下，在我使用1.5.3版本pod执行的时候，会报一个error是bug引起的，无法解决，通过升级到最新版pod就好了，升级pod只需要执行sudo gem install cocoapods就行了
 #命令行：
 #git tag -m"first tag MyPodTestPro" "0.1.0"#打tag 上传podspec
 #git push --tags
-#pod trunk push MyPodTestPro.podspec #把podspec文件推送到CocoaPod官方库
 #上传需要一定时间，成功后更新本地pod依赖库
+#提交：
+#pod trunk push MyPodTestPro.podspec --verbose --allow-warnings --use-libraries
+#把podspec文件推送到CocoaPod官方库
+#上传podspec到trunk服务器中
+#将这个仓库clone到本地的.cocoapod/repos/xxxPodSpecs,当然这里使用pod命令行工具来执行，pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git，执行完成后再执行pod repo list就可以看到我们私有的spec仓库在列了。
+#升级pod执行sudo gem install cocoapods命令
 #命令行：pod setup
 #查看代码有没有通过审核版本是否更新
 #命令行：pod search MyPodTestPro
