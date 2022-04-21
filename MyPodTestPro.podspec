@@ -48,6 +48,8 @@ Pod::Spec.new do |s|
   s.version          = '0.1.0'
   s.summary          = 'A short description of MyPodTestPro.'#用于pod search 库的时候可以看到该类库的一个简述
   # spec.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.source           = { :git => 'https://github.com/localhost3585@gmail.com/MyPodTestPro.git', :tag => s.version.to_s }
+
   #使用HTTP下载代码的压缩文件。它支持zip、tgz、bz2、txz和tar。
 #  spec.source = { :http => 'http://dev.wechatapp.com/download/sdk/WeChat_SDK_iOS_en.zip' }
 #使用HTTP下载文件，使用hash来验证下载。它支持sha1和sha256。
