@@ -6,19 +6,25 @@
 # pod lib create GlobalButton 创建组件
 # pod lib lint --allow-warnings --verbose 验证组件# --allow-warnings 屏蔽警告,--verbose 以获取更多错误信息 --use-libraries
 #验证podspec文件是否可正常使用
-#命令行：pod lib lint
-#pod spec lint --verbose --allow-warnings --use-librarie
-#既有私有库依赖，还有CommonCrypto这种的依赖：
-#验证
-#pod spec lint --verbose --allow-warnings --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)’
-#命令行：
+#pod spec lint --allow-warnings --verbose --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)’
+#pod lib lint --allow-warnings --verbose --use-librarie
+#这里要说明一下
+#1、lib lint是只从本地验证你的pod能否通过验证;
+#2、spec lint是从本地和远程验证你的pod能否通过验证；
+#3、私有pod的验证，使用pod spec lint去验证私有库能否通过验证时应该要添加--sources选项,不然会出现找不到repo的错误；
+#4、因为我的是私有pod库，所以我使用的是lib lint就可以。
+
+#git branch -M main
+#git add .
+#git commit -m""
+#git remote add origin https://github.com/Andrew5/MyPodTestPro.git
+#git push -u origin main
 #git tag -m"first tag MyPodTestPro" "0.1.0"#打tag 上传podspec
 #git push --tags
-#上传需要一定时间，成功后更新本地pod依赖库
-#提交：
-#pod trunk push MyPodTestPro.podspec --verbose --allow-warnings --use-libraries
-#把podspec文件推送到CocoaPod官方库
-#上传podspec到trunk服务器中
+#pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git  #与远端仓库建立联系
+#pod repo push MyPodTestPro MyPodTestPro.podspec --verbose --allow-warnings --use-libraries #把自己私有库的索引添加到自己私有库中 ⚠️记得要把podspec文件里s.source 地址换成自己的远程地址(如果提交代码有报错自行百度搜索)
+#提交，上传podspec到trunk服务器中
+#pod trunk push MyPodTestPro.podspec --verbose --allow-warnings --use-libraries(可用这个命令直接上传)
 #将这个仓库clone到本地的.cocoapod/repos/xxxPodSpecs,当然这里使用pod命令行工具来执行，pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git，执行完成后再执行pod repo list就可以看到我们私有的spec仓库在列了。
 #升级pod执行sudo gem install cocoapods命令
 #命令行：pod setup
@@ -28,6 +34,7 @@
 #命令行：pod install
 #将podspec文件push到cocoapods服务器上
 #pod trunk register 邮箱全称 '用户名' --verbose
+#pod trunk push MyPodTestPro.podspec
 #deterministic_uuids 在创建Pods项目时是否生成确定性uuid该选项默认为true
 #integrate_targets 是否将安装的pods集成到用户项目中
 #如果设置为false, Pods将被下载并安装到Pods/目录中，但是它们不会集成到你的项目中。该选项默认为true。
