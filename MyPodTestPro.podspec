@@ -3,10 +3,12 @@
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 # https://www.jianshu.com/p/8c6941778f0e
+# 发布Pod框架 https://juejin.cn/post/6844903472320495629
+# Git Stash 贮藏命令 https://blog.csdn.net/chen15369337607/article/details/121905028
 # pod lib create GlobalButton 创建组件
 # pod lib lint --allow-warnings --verbose 验证组件# --allow-warnings 屏蔽警告,--verbose 以获取更多错误信息 --use-libraries
 #验证podspec文件是否可正常使用
-#pod spec lint --allow-warnings --verbose --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)’
+#pod spec lint --allow-warnings --verbose --use-libraries --sources='[https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git](https://github.com/CocoaPods/Specs.git,https://github.com/Andrew5/MyPodTestPro.git)'
 #pod lib lint --allow-warnings --verbose --use-librarie
 #这里要说明一下
 #1、lib lint是只从本地验证你的pod能否通过验证;
@@ -22,8 +24,20 @@
 #git tag -m"first tag MyPodTestPro" "0.1.0"#打tag 上传podspec
 #git push --tags
 #pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git  #与远端仓库建立联系
-#pod repo push MyPodTestPro MyPodTestPro.podspec --verbose --allow-warnings --use-libraries #把自己私有库的索引添加到自己私有库中 ⚠️记得要把podspec文件里s.source 地址换成自己的远程地址(如果提交代码有报错自行百度搜索)
+#pod repo push MyPodTestPro MyPodTestPro.podspec --sources=https://github.com/Andrew5/MyPodTestPro.git --commit-message="MyPodTestPro" --verbose --allow-warnings --use-libraries  #把自己私有库的索引添加到自己私有库中 ⚠️记得要把podspec文件里s.source 地址换成自己的远程地址(如果提交代码有报错自行百度搜索)
 #提交，上传podspec到trunk服务器中
+## 一个文件上传两个仓库
+#git init //初始化一个git的本地仓库
+#git add README.md //将我的文件装上武器，准备发射
+#git commit -m “first commit” //第一次发射，我的README.md 宝贝已经成功进入到本地仓库
+#git remote add Ceres your_first_git_address //将第一个git address命名为Ceres
+#git push -u Ceres master //注意咯，我要向远端木星发射了，太远了，一定要用push，很费劲的赶脚
+# 这时，不要动，准备再次将我的README宝贝发射到火星上去，
+# 但是因为我的文件已经存在与本地仓库了，因此我就不需要再多余地commit等，
+# 只需要将另一个远端仓库与本地仓库建立一个连接就可以了
+#git remote add Mars your_second_git_address //将第二个git address命名为Mars
+#git push -u Mars master //再次发射，目标火星上的master分支
+
 #pod trunk push MyPodTestPro.podspec --verbose --allow-warnings --use-libraries(可用这个命令直接上传)
 #将这个仓库clone到本地的.cocoapod/repos/xxxPodSpecs,当然这里使用pod命令行工具来执行，pod repo add MyPodTestPro https://github.com/Andrew5/MyPodTestPro.git，执行完成后再执行pod repo list就可以看到我们私有的spec仓库在列了。
 #升级pod执行sudo gem install cocoapods命令
@@ -35,6 +49,7 @@
 #将podspec文件push到cocoapods服务器上
 #pod trunk register 邮箱全称 '用户名' --verbose
 #pod trunk push MyPodTestPro.podspec
+#学习网址：https://zhuanlan.zhihu.com/p/340885692
 #deterministic_uuids 在创建Pods项目时是否生成确定性uuid该选项默认为true
 #integrate_targets 是否将安装的pods集成到用户项目中
 #如果设置为false, Pods将被下载并安装到Pods/目录中，但是它们不会集成到你的项目中。该选项默认为true。
@@ -107,7 +122,11 @@ Pod::Spec.new do |s|
 ##指定某些文件支持ARC
 #spec.requires_arc = ['Classes/*ARC.m', 'Classes/ARC.mm']
 #需要链接的系统frameworks
-
+# 修改info.plist
+#spec.info_plist = {
+#  'CFBundleIdentifier' => 'com.xxxx.MyPodTestPro',
+#  'MY_VAR' => 'SOME_VALUE'
+#}
 #spec.ios.framework = 'CFNetwork'
 ##多个库
 #spec.frameworks = 'QuartzCore', 'CoreData'
